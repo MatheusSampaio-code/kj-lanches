@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<!-- Avisa ao navegador que é uma página HTML5 -->
+<html lang="pt-BR">
+<!-- Idioma da página: português do Brasil -->
+<head>
+<!-- Cabeçalho: configurações que o cliente não vê -->
+<meta charset="UTF-8">
+<!-- Permite acentos e caracteres especiais -->
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- Ajusta a página ao tamanho da tela do celular -->
+<title>K&J Lanches | Faça seu pedido</title>
+<!-- Texto que aparece na aba do navegador -->
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Nunito:wght@600;800&display=swap" rel="stylesheet">
+<!-- Carrega as fontes Anton (títulos) e Nunito (textos) do Google -->
+<link rel="stylesheet" href="estilo.css">
+<!-- Liga o arquivo de visual (cores, tamanhos) -->
+</head>
+<body>
+<!-- Corpo: tudo que aparece na tela -->
+
+<header>
+  <!-- Faixa amarela do topo -->
+  <h1>K&amp;J LANCHES</h1>
+  <!-- Nome da lanchonete (&amp; escreve o símbolo &) -->
+  <p>Sabor que faz a diferença! Escolha, confirme e receba.</p>
+  <!-- Frase de apresentação -->
+</header>
+
+<main id="cardapio"></main>
+<!-- Aqui o app.js desenha os produtos automaticamente -->
+
+<button id="barra" onclick="abrirCarrinho()">
+  <!-- Barra vermelha fixa no rodapé; ao tocar, abre o carrinho -->
+  <span id="barraQtd">0 itens</span>
+  <!-- Mostra quantos itens foram escolhidos -->
+  <span id="barraTotal">R$ 0,00</span>
+  <!-- Mostra o total do pedido -->
+</button>
+
+<div id="fundoModal">
+  <!-- Fundo escuro que segura a janela do carrinho -->
+  <div id="modal">
+    <!-- Janela do carrinho -->
+    <h2>Seu pedido</h2>
+    <!-- Título do carrinho -->
+    <div id="resumo"></div>
+    <!-- O app.js lista aqui os itens escolhidos -->
+
+    <label for="nome">Seu nome</label>
+    <!-- Rótulo do campo de nome -->
+    <input id="nome" placeholder="Ex.: João">
+    <!-- Campo onde o cliente digita o nome (opcional) -->
+
+    <label for="endereco">Endereço de entrega</label>
+    <!-- Rótulo do campo de endereço -->
+    <input id="endereco" placeholder="Rua, número, bairro">
+    <!-- Campo onde o cliente digita o endereço -->
+
+    <label for="pagamento">Forma de pagamento</label>
+    <!-- Rótulo da forma de pagamento -->
+    <select id="pagamento">
+      <!-- Lista de opções -->
+      <option value="">Escolha...</option>
+      <!-- Opção vazia: obriga o cliente a escolher -->
+      <option>Dinheiro</option>
+      <!-- Pagamento em dinheiro -->
+      <option>Cartão</option>
+      <!-- Pagamento no cartão -->
+      <option>Pix</option>
+      <!-- Pix: o dono manda a chave pelo WhatsApp -->
+    </select>
+
+    <p id="erro"></p>
+    <!-- Espaço para avisos, ex.: "Preencha o endereço" -->
+    <button id="enviar" onclick="enviarPedido()">Enviar pedido no WhatsApp</button>
+    <!-- Botão que monta a mensagem e abre o WhatsApp -->
+    <button id="fechar" onclick="fecharCarrinho()">Voltar ao cardápio</button>
+    <!-- Botão para fechar o carrinho e continuar escolhendo -->
+  </div>
+</div>
+
+<script src="app.js"></script>
+<!-- Liga o arquivo de funcionamento (fica no fim para a página carregar antes) -->
+</body>
+</html>
