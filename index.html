@@ -58,7 +58,8 @@
 
     <label for="pagamento">Forma de pagamento</label>
     <!-- Rótulo da forma de pagamento -->
-    <select id="pagamento">
+    <select id="pagamento" onchange="mostrarTroco()">
+<!-- onchange: sempre que o cliente muda a forma de pagamento, roda a função mostrarTroco (no app.js) -->
       <!-- Lista de opções -->
       <option value="">Escolha...</option>
       <!-- Opção vazia: obriga o cliente a escolher -->
@@ -69,7 +70,18 @@
       <option>Pix</option>
       <!-- Pix: o dono manda a chave pelo WhatsApp -->
     </select>
+    <div id="blocoTroco" hidden>
+      <!-- Bloco do troco: começa escondido (hidden) e só aparece se o pagamento for Dinheiro -->
+      <label for="troco">Troco para quanto?</label>
+      <!-- Rótulo do campo de troco -->
+      <input id="troco" type="number" inputmode="decimal" placeholder="Ex.: 50 (vazio se não precisa)">
+      <!-- Campo só para números; inputmode abre o teclado numérico no celular -->
+    </div>
 
+    <label for="obs">Observação (opcional)</label>
+    <!-- Rótulo do campo de observação -->
+    <input id="obs" placeholder="Ex.: sem cebola, maionese à parte">
+    <!-- Campo onde o cliente escreve pedidos especiais -->
     <p id="erro"></p>
     <!-- Espaço para avisos, ex.: "Preencha o endereço" -->
     <button id="enviar" onclick="enviarPedido()">Enviar pedido no WhatsApp</button>

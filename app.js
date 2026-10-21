@@ -1,5 +1,5 @@
 // ===== CONFIGURAÇÃO: o dono só precisa mexer aqui =====
-const NUMERO_WHATSAPP = "5521999272731"; // 55 + DDD + número do dono, sem espaços nem traços
+const NUMERO_WHATSAPP = "5521990146378"; // 55 + DDD + número do dono, sem espaços nem traços
 
 // ===== CARDÁPIO: cada produto é uma linha. Para mudar preço ou nome, edite aqui =====
 // id = identificador único (sem espaço) | nome = o que o cliente vê | preco = número com ponto | desc = descrição
@@ -108,12 +108,18 @@ function abrirCarrinho() {
 function fecharCarrinho() {
   document.getElementById("fundoModal").style.display = "none"; // esconde a janela
 }
-
+// ===== FUNÇÃO mostrarTroco: mostra o campo de troco só quando o pagamento é Dinheiro =====
+function mostrarTroco() {
+  const pagamento = document.getElementById("pagamento").value; // lê a forma de pagamento escolhida
+  document.getElementById("blocoTroco").hidden = pagamento !== "Dinheiro"; // esconde o bloco, exceto se for Dinheiro
+}
 // ===== FUNÇÃO enviarPedido: monta a mensagem e abre o WhatsApp =====
 function enviarPedido() {
   const nome = document.getElementById("nome").value.trim(); // lê o nome (trim tira espaços sobrando)
   const endereco = document.getElementById("endereco").value.trim(); // lê o endereço
   const pagamento = document.getElementById("pagamento").value; // lê a forma de pagamento
+    const troco = document.getElementById("troco").value.trim(); // lê o valor do troco digitado
+  const obs = document.getElementById("obs").value.trim(); // lê a observação digitada
   const erro = document.getElementById("erro"); // acha o espaço de aviso
 
   if (!endereco || !pagamento) { // se faltar endereço ou pagamento
@@ -132,7 +138,8 @@ function enviarPedido() {
   if (nome) msg += `\nNome: ${nome}`; // nome (só se foi preenchido)
   msg += `\nEndereço: ${endereco}`; // endereço
   msg += `\nForma de pagamento: ${pagamento}`; // forma de pagamento
-
+    if (pagamento === "Dinheiro" && troco) msg += `\nTroco para: R$ ${troco}`; // troco só entra se for Dinheiro e foi preenchido
+  if (obs) msg += `\nObservação: ${obs}`; // observação só entra se foi preenchida
   const link = "https://wa.me/" + NUMERO_WHATSAPP + "?text=" + encodeURIComponent(msg); // monta o link do WhatsApp (encodeURIComponent deixa o texto seguro para link)
   window.open(link, "_blank"); // abre o WhatsApp
 }
